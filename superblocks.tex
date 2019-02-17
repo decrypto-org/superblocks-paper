@@ -1,0 +1,30 @@
+%!TEX encoding = UTF-8 Unicode
+
+\newif\ifanonymous
+\newif\ifshort
+\newif\iflncs
+% \lncstrue
+% \anonymoustrue
+% \shorttrue
+
+\documentclass[11pt]{llncs}
+\usepackage{preamble}
+
+\begin{document}
+\import{./}{title.tex}
+\thispagestyle{plain}
+\import{./}{abstract.tex}
+
+% \import{./}{introduction.tex}
+% \import{./}{related.tex}
+% \import{./}{preliminaries.tex}
+% \import{./}{definition.tex}
+% \import{./}{experiments.tex}
+% \import{./}{conclusion.tex}
+\bibliographystyle{alpha}
+\bibliography{pubs,abbrev3,crypto}
+
+% \newpage
+% \import{./}{appendix.tex}
+
+\end{document}
