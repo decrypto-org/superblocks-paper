@@ -1,0 +1,110 @@
+\section{Introdution}
+
+Bitcoin~\cite{bitcoin} and other blockchains which use the same backbone
+consensus mechanism~\cite{EC:GarKiaLeo15} mandate that blocks have valid
+proof-of-work~\cite{C:DwoNao92} if they satisfy the proof-of-work equation
+$H(B) \leq T$ where $T$ denotes the mining target~\cite{SP:BMCNKF15} and $B$
+denotes the block contents which is a triplet including a representation of the
+application data and metadata, a nonce, and a reference to the previous block by
+its hash. The function $H$ is a hash function which is modelled as a random
+oracle~\cite{CCS:BelRog93} which outputs $\kappa$ bits, where $\kappa$ is the
+security parameter of the protocol. It sometimes happens that some blocks
+satisfy a stronger version of the equation~\cite{popow}, namely that $H(B) \leq
+T2^{-\mu}$ for some $\mu \in \mathbb{N}$. Such blocks are called
+$\mu$-superblocks~\cite{nipopows}.
+
+The count of superblocks in a chain decreases exponentially as $\mu$ increases.
+If a blockchain $\chain$ generated in an honest execution has $|\chain|$ blocks,
+it only has $2^{-\mu}|\chain|$ superblocks of level $\mu$ in expectation. Hence,
+the total number of levels is $\lg(|\chain|)$ in expectation. For any block $B$,
+it is useful to be able to refer to its most recent preceding $\mu$-superblock
+for any $\mu \in \mathbb{N}$. In addition, it is useful to include this
+reference to the contents of the block to which proof-of-work is being applied
+so that the miner proves that $B$ was generated after the preceding superblock.
+For this purpose, it has been recommended that for each block $B$, instead of
+including just a pointer to the previous block, $\lg(|\chain|)$ pointers will be
+included, one for each level $\mu$ pointing to the most recent $\mu$-superblock
+preceding $B$.
+
+These $\lg(|\chain|)$ pointers per block are called the \emph{interlink} data
+structure and can either be included in the block header \emph{verbatim}, or
+organized into a more compact data structure such as a Merkle tree~\cite{merkle}
+\TODO{TODO citation} containing one leaf per superblock level $\mu$.
+Proofs-of-inclusion in this Merkle tree are then $\Theta(\lg\lg(|\chain|))$. The
+root of this Merkle tree can be included in the block header, replacing the
+typical \textsf{previd}. This is done in blockchains adopting interlinking from
+genesis or through a hard fork. More commonly, it can be included in the
+application data. Thus, it can be included in the coinbase transaction in the
+case of a soft fork or velvet fork~\cite{velvet}, or a specially crafted
+\emph{velvet transaction} in the case of a user-activated velvet fork. Velvet
+forks allow the adoption of the new rule without requiring miners to upgrade
+their software or be aware of the change. In these cases, the interlink
+proof-of-inclusion, which proves that the superblock pointer was included in the
+interlink root, must be accompanied by a transaction proof-of-inclusion, which
+proves that the interlink root has been included in the application data
+committed to the block header (either in the coinbase transaction, if done by a
+miner, or in the velvet transaction, if done by a user).
+
+Superblock pointers can be used to traverse the blockchain from the tip to
+genesis in a manner which skips some unnecessary intermediary blocks and
+includes others. The idea is to find a succinct sample of blocks such that it is
+a subchain of the blockchain, i.e., each block in the subchain must include a
+pointer (either directly through \textsf{previd} or indirectly through the
+interlink vector) to its immediately preceding block in the subchain (which
+corresponds to an ancestor block in the underlying blockchain). Because each
+pointer is proof-of-work committed in the interlink data structure, it suffices
+to collect the chosen blocks along with the proofs-of-inclusion. By cleverly
+choosing which blocks to collect, a full node can prove to a so-called
+\emph{superlite node} that the currently adopted longest blockchain is the
+claimed one without presenting the whole blockchain. Hence, instead of
+transmitting data linear in the chain size $\Theta(|\chain|)$ as SPV clients do,
+it is sufficient to transmit succinct certificates which are only of size
+$\Theta(\emph{poly}\log(|\chain|))$. Such certificates are called Non-Interactive
+Proofs of Proof-of-Work~\cite{nipopows}. The NIPoPoWs protocol is parameterized
+by a security parameter $m$ and requires $2m$ blocks to be included for each
+superblock level $\mu$ which contains at least $m$ blocks, except for the
+highest level $\mu$ for which only $m$ blocks need to be included. As the number
+of levels containing at least $m$ blocks is $\log(|\chain|) - \log(m)$, the
+number of blocks included in a NIPoPoW are $\log(|\chain|) - \log(m)$.
+
+\noindent
+\textbf{Related work.}
+Superblocks were first observed to exist in~\cite{highway} \TODO{TODO citation}.
+The interlink data structure was put forth in~\cite{popow}, where it was also
+observed that it can be organized into a Merkle tree. Interlinks containing more
+blocks than just superblocks or even all blocks have been
+proposed~\cite{vitalik-eip,flyclient} \TODO{TODO citations}. Interlinks have
+been included from genesis in several cryptocurrencies such as ERGO, nimiq, and
+WebDollar \TODO{TODO citations}. In~\cite{nipopows}, the consumption of the
+interlink data to construct Non-Interactive Proofs of Proofs-of-Work was
+presented and concrete numbers were given about the sizes of such proofs. They
+also presented a way to construct such a structure without a soft or hard fork,
+but a velvet fork, which was later explored in~\cite{velvet}. Bitcoin Cash has
+been velvet forked in this manner~\cite{gtklocker} \todo{TODO citation}. One
+application of NIPoPoWs is cross-chain transfers~\cite{pow-sidechains}
+\TODO{TODO citation} with a proof-of-work blockchain source. Comparable
+constructions have also appeared for proof-of-stake
+blockchains~\cite{pos-sidechains} \TODO{replace citation with Oakland}.
+
+\noindent
+\textbf{Our contributions.} The contributions of this paper are summarized as
+follows:
+
+\begin{enumerate}
+  \item We measure superblock distributions for Bitcoin, Bitcoin Cash, Ethereum
+        and Monero. We see that the distribution of superblocks follows
+        expectation, indicating there are no ongoing or historical attacks of
+        \emph{badness}. We are the first to collect any empirical measurements
+        of superblocks on real blockchains.
+  \item We put forth the simple but important optimization in regards to the way
+        blocks are compactly stored in an interlink tree by observing that
+        duplicate pointers can be removed without harming security. As such, we
+        construct interlink \emph{block sets} instead of interlink \emph{block
+        lists}. To our knowledge, no implementation currently does this.
+  \item We prove that our optimization reduces the number of pointers in each
+        interlink by a half on average.
+  \item We collect empirical data regarding the performance of our improvement,
+        including concrete sizes of NIPoPoWs built. We experimentally
+        demonstrate that our optimizaiton reduces the already very succinct
+        NIPoPoW certificates by $6.6\%$.
+\end{enumerate}
