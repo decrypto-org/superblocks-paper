@@ -53,7 +53,7 @@ follows:
 
 \begin{enumerate}
   \item We measure superblock distributions for Bitcoin, Bitcoin Cash, Ethereum
-        and Monero. We see that the distribution of superblocks follows
+        and Monero. We show that the distribution of superblocks follows
         expectation, indicating there are no ongoing or historical attacks of
         \emph{badness}. We are the first to collect any empirical measurements
         of superblocks on real blockchains.
@@ -61,11 +61,13 @@ follows:
         blocks are compactly stored in an interlink tree by observing that
         duplicate pointers can be removed without harming security. As such, we
         construct interlink \emph{block sets} instead of interlink \emph{block
-        lists}. To our knowledge, no implementation currently does this.
+        lists}. To our knowledge, no implementation currently does this, but all
+        existing implementations could benefit by applying this modification.
   \item We prove that our optimization reduces the number of pointers in each
         interlink by a half on average.
-  \item We collect empirical data regarding the performance of our improvement,
-        including concrete sizes of NIPoPoWs built. We experimentally
-        demonstrate that our optimizaiton reduces the already very succinct
-        NIPoPoW certificates by $6.6\%$.
+  \item We implement our improvement on the Bitcoin Cash blockchain and collect
+        empirical data regarding the performance of our improvement, including
+        concrete sizes of NIPoPoWs built. We experimentally demonstrate that our
+        optimizaiton reduces the already very succinct NIPoPoW certificates by
+        $6.6\%$.
 \end{enumerate}
