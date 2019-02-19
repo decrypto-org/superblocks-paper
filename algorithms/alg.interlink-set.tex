@@ -1,0 +1,22 @@
+\begin{algorithm}[H]
+    \caption{\label{alg.interlink}updateInterlinkSet}
+    \begin{algorithmic}[1]
+        \Function{\sf calculateInterlinkSet}{$\chain$}
+            \Let{\textsf{interlinkSet}}{\emptyset}
+            \Let{\textsf{seen}}{\emptyset}
+            \Let{\chain}{\chain[:-1]}
+            \While{$\chain \neq \epsilon$}
+                \Let{\mu}{\lg(T) - \lfloor\lg(H(\chain[-1]))\rfloor}
+                \For{$i = 0$ to $\mu$}
+                    \If{$i \not\in \textsf{seen}$}
+                        \Let{\textsf{seen}}{\textsf{seen} \cup \{i\}}
+                        \Let{\textsf{interlinkSet}}{\textsf{interlinkSet} \cup \{\chain[-1]\}}
+                    \EndIf
+                \EndFor
+                \Let{\chain}{\chain[:-1]}
+            \EndWhile
+            \State\Return{\textsf{interlinkSet}}
+        \EndFunction
+    \vskip8pt
+    \end{algorithmic}
+\end{algorithm}

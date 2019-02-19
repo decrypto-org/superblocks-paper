@@ -1,1 +1,20 @@
 \section{Interlinks as sets of superblocks}
+
+In superblock-enabled blockchains, the interlink vector stored in each block $B$
+contains one pointer per superblock level $\mu$, namely a pointer to the most
+recent superblock preceding $B$ of the respective level $\mu$. This
+construction, known as an \emph{interlink list}, is realized by inductively
+updating the interlink of the previous block, as shown in
+Algorithm~\ref{alg.interlink}. Trivially, genesis has an empty interlink. By
+convention genesis is of infinite level and we include it in every subsequent
+interlink.
+
+\import{./}{algorithms/alg.interlink.tex}
+
+Here, we make the novel but simple observation that the interlink structure
+constructed in this manner often contains duplicate pointers. In fact, as we
+will show, most of the interlink pointers are duplicate. Instead, space can be
+saved by constructing an \emph{interlink set} instead. This construction is
+shown in Algorithm~\ref{alg.interlink-set}.
+
+\import{./}{algorithms/alg.interlink-set.tex}
