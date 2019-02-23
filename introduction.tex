@@ -12,12 +12,12 @@ By sampling the superblocks of a chain, short proofs about a blockchain can be
 created, which allow a client to synchronize with the longest blockchain without
 downloading all blocks. These so-called \emph{proofs of proof-of-work} contain
 only a small number of cleverly chosen superblocks which compact the
-proof-of-work of the blockchain into a succinct string. However, while the
-existence of superblocks has been theoretically posed and the protocol has even
-been deployed in practice, the distribution of superblocks within a blockchain
-has not been measured. In this paper, we provide measurements of this
-distribution for four proof-of-work blockchains: Bitcoin, Bitcoin Cash,
-Ethereum, and Monero.
+proof-of-work of the blockchain into a succinct string, while maintaining the
+same security level as SPV clients. However, while the existence of superblocks
+has been theoretically posed and the protocol has even been deployed in
+practice, the distribution of superblocks within a blockchain has not been
+measured. In this paper, we provide measurements of this distribution for the
+Bitcoin blockchain.
 
 In order for superblock sampling to work, it is necessary that each block
 contains, in addition to the standard pointer to its previous block, a few
