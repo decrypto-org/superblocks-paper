@@ -5,9 +5,7 @@ contains one pointer per superblock level $\mu$, namely a pointer to the most
 recent superblock preceding $B$ of the respective level $\mu$. This
 construction, known as an \emph{interlink list}, is realized by inductively
 updating the interlink of the previous block, as shown in
-Algorithm~\ref{alg.interlink}. Trivially, genesis has an empty interlink. By
-convention genesis is of infinite level and we include it in every subsequent
-interlink.
+Algorithm~\ref{alg.interlink}. Trivially, genesis has an empty interlink.
 
 \import{./}{algorithms/alg.interlink.tex}
 
