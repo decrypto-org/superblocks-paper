@@ -10,10 +10,12 @@ Algorithm~\ref{alg.interlink}. Trivially, genesis has an empty interlink.
 \import{./}{algorithms/alg.interlink.tex}
 
 Here, we make the novel but simple observation that the interlink structure
-constructed in this manner often contains duplicate pointers. In fact, as we
-will show, most of the interlink pointers are duplicate. Space can be
-saved by constructing an \emph{interlink set} instead. This construction is
-shown in Algorithm~\ref{alg.interlink-set}.
+constructed in this manner often contains \emph{duplicate pointers}. In fact, as
+we will show, most of the interlink pointers are duplicate. Space can be saved
+by constructing an \emph{interlink set} instead. This construction is shown in
+Algorithm~\ref{alg.interlink-set}. Here, $\epsilon$ denotes the empty sequence
+and we address lists using standard Python notation (hence, $\chain[-1]$ denotes
+the tip of $\chain$ and $\chain[:-1]$ denotes everything but the tip).
 
 \import{./}{algorithms/alg.interlink-set.tex}
 
