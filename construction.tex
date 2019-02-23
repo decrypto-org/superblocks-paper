@@ -15,7 +15,10 @@ we will show, most of the interlink pointers are duplicate. Space can be saved
 by constructing an \emph{interlink set} instead. This construction is shown in
 Algorithm~\ref{alg.interlink-set}. Here, $\epsilon$ denotes the empty sequence
 and we address lists using standard Python notation (hence, $\chain[-1]$ denotes
-the tip of $\chain$ and $\chain[:-1]$ denotes everything but the tip).
+the tip of $\chain$ and $\chain[:-1]$ denotes everything but the tip). The
+algorithm returns the exact same data structure as
+Algorithm~\ref{alg.interlink}, but with duplicates removed. Note that it can
+also be directly adopted to work in an online fashion.
 
 \import{./}{algorithms/alg.interlink-set.tex}
 
