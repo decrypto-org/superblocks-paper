@@ -4,19 +4,19 @@
   a \emph{superblock}. Superblocks play an important role in the construction of
   compact blockchain proofs which allows the compression of proof-of-work
   blockchains into so-called \emph{proof of proof-of-work} certificates. In this
-  work, we measure the distribution of superblocks in Bitcoin, Bitcoin Cash,
-  Ethereum and Monero testnets and mainnets. We find that superblock
-  distribution within the blockchain follows expectation, hence we empirically
-  verify that these blockchains are not under previously theoretically posed
-  attacks of \emph{badness}. Given these empirical statistics, we discuss
-  efficient ways to store the \emph{interlink} data structure, which contains
-  the most recent superblocks preceding each block. We observe that, when
-  constructing an interlink by collecting superblocks into a Merkle tree,
-  repeated superblock references can be omitted with no harm to security. Hence,
-  it is more efficient to store a set of superblocks rather than a list. We
-  analytically prove that, in honest executions, this simple observation reduces
-  the number of superblock references to half. We then verify our theoretical
-  result by measuring the improvement over existing blockchains in terms of the
-  interlink sizes (which we improve by $50\%$) and the sizes of succinct proofs
-  of proof-of-work (which we improve by $6.6\%$) \TODO{TODO verify numbers}.
+  work, we measure the distribution of superblocks in the Bitcoin blockchain. We
+  find that superblock distribution within the blockchain follows expectation,
+  hence we empirically verify that these blockchains are not under previously
+  theoretically posed attacks of \emph{badness}. Given these empirical
+  statistics, we discuss efficient ways to store the \emph{interlink} data
+  structure, which contains the most recent superblocks preceding each block. We
+  observe that, when constructing an interlink by collecting superblocks into a
+  Merkle tree, repeated superblock references can be omitted with no harm to
+  security. Hence, it is more efficient to store a set of superblocks rather
+  than a list. We analytically prove that, in honest executions, this simple
+  observation reduces the number of superblock references to at least a half in
+  expectation. We then verify our theoretical result by measuring the
+  improvement over existing blockchains in terms of the interlink sizes (which
+  we improve by $83\%$) and the sizes of succinct proofs of proof-of-work (which
+  we improve by $44\%$).
 \end{abstract}
