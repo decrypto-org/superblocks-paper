@@ -13,8 +13,20 @@ interlink.
 
 Here, we make the novel but simple observation that the interlink structure
 constructed in this manner often contains duplicate pointers. In fact, as we
-will show, most of the interlink pointers are duplicate. Instead, space can be
+will show, most of the interlink pointers are duplicate. Space can be
 saved by constructing an \emph{interlink set} instead. This construction is
 shown in Algorithm~\ref{alg.interlink-set}.
 
 \import{./}{algorithms/alg.interlink-set.tex}
+
+Let $B^n_\mu \in \{0, 1\}$ denote the random variable containing the value of
+the $\mu^{\text{th}}$ digit after $n$ turns. Then we have that:
+
+\begin{align*}
+\Pr[B^n_\mu = 1] =
+\sum_{i = 1}^n 2^{-\mu} \prod_{j = i + 1}^n \sum_{\mu' = 1}^{\mu - 1} 2^{-\mu'} &=\\
+\sum_{i = 1}^n 2^{-\mu} \prod_{j = i + 1}^n (1 - 2^{1 - \mu}) &=\\
+\sum_{i = 1}^n 2^{-\mu} (1 - 2^{1 -\mu})^{n - (i + 1) + 1} &=\\
+\sum_{i = 1}^n 2^{-\mu} (1 - 2^{1 -\mu})^{n - i} &=\\
+2^{-\mu} \sum_{i = 1}^n (1 - 2^{1 -\mu})^{n - i} &=\\
+\end{align*}
