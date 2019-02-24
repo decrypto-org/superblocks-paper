@@ -40,44 +40,96 @@ for each level $\mu$ pointing to the most recent $\mu$-superblock preceding $B$.
 These pointers change the blockchain into a block skiplist \TODO{TODO skiplist
 citation}.
 
-These $\lg(|\chain|)$ pointers per block are called the \emph{interlink} data
-structure and can either be included in the block header \emph{verbatim}, or
-organized into a more compact data structure such as a Merkle tree~\cite{merkle}
-\TODO{TODO citation} containing one leaf per superblock level $\mu$.
-Proofs-of-inclusion in this Merkle tree are then $\Theta(\lg\lg(|\chain|))$. The
-root of this Merkle tree can be included in the block header, replacing the
-typical \textsf{previd}. This is done in blockchains adopting interlinking from
-genesis or through a hard fork. More commonly, the interlink Merkle tree root
-can be included in the block's application data. Thus, it can, for instance,
-appear in the coinbase transaction in the case of a soft or velvet
-fork~\cite{velvet}, or a specially crafted \emph{velvet transaction} in the case
-of a user-activated velvet fork. User-activated velvet forks allow the adoption
-of a new rule without requiring miners to upgrade their software or be aware of
-the change. In case of a velvet fork, the interlink proof-of-inclusion, which
-proves that the superblock pointer was included in the interlink root, must be
-accompanied by a transaction proof-of-inclusion, which proves that the interlink
-root has been included in the application data committed to the block header
-(either in the coinbase transaction, if done by a miner, or in the velvet
-transaction, if done by a user).
+These $\lg(|\chain|)$ pointers per block are called the \emph{interlink}.
+One way to include them is to replace the \textsf{previd} pointer, which in
+typical blockchains points to the previous block hash, with the interlink list
+of block hashes to be included \emph{verbatim} in the block header.
+Alternatively, the interlink list of hashes can be
+organized into a compact data structure such as a Merkle tree~\cite{merkle}
+\TODO{TODO citation} containing one leaf per superblock level $\mu$. The number
+of leafs in this Merkle tree is $\lg(|\chain|)$ and its height is
+$\lg\lg(|\chain|)$. Hence,
+proofs-of-inclusion in this Merkle tree are of size
+$\Theta(\lg\lg(|\chain|))$. The root of this Merkle tree can be included in the
+block header, replacing \textsf{previd}. This is done in blockchains adopting
+interlinking from genesis or through a hard fork~\cite{nimiq,ergo}.
+
+More commonly, to avoid modifying the block header format, the interlink Merkle
+tree root can be included in the block's application data. In this case, the
+root of the Merkle tree appears as auxiliary data within a particular transaction
+which is included in the block. If the miners of the blockchain are aware of the
+interlink, then it can be required that they included it in their coinbase
+transaction. The veracity of the interlink data does not need to be verified
+when it is included in a block, as invalid or malicious data in the interlink
+does not harm security. Hence, it is possible to include the interlink data in a user
+transaction. In this case, the transaction which includes the root of the
+interlink is called a \emph{velvet transaction} and its inclusion is termed a
+\emph{user-activated velvet fork}~\cite{gtklocker}. In practice, this
+transaction is implemented using an \textsf{OP\_RETURN} committing to the Merkle
+tree root containing the interlink list in its leafs. User-activated velvet
+forks allow the adoption of a new rule without requiring miners to upgrade their
+software or be aware of the change, and are hence backwards-compatible.
+
+It is useful to be able to prove that a block $B$ contains a pointer to a
+particular ancestor $B'$ in its interlink. This statement is proven by a full
+node who holds all blockchain data, the \emph{prover} $P$, to a superlight
+\emph{verifier} $V$ who holds only the header of block $B$. This proof is
+straightforward. The header of block $B$ contains the Merkle tree root of the
+transactions tree $mtr_1$ and is hence known to $V$. First, a Merkle
+tree proof-of-inclusion $\pi_1$ proves that $mtr_1$ contains the velvet transaction
+$tx$. The velvet transaction $tx$ commits to auxiliary data which includes the
+interlink Merkle tree root $mtr_2$.
+Secondly, another Merkle tree proof-of-inclusion $\pi_2$ proves that $mtr_2$
+contains the hash of $B'$. While we cannot improve the size of $\pi_1$, in this
+paper we aim to improve the size of $\pi_2$.
 
 Superblock pointers can be used to traverse the blockchain from the tip back to
-genesis in a manner which skips some unnecessary intermediary blocks and
-includes others. The idea is to find a succinct sample of blocks such that it is
-a subchain of the blockchain, i.e., each block in the subchain includes a
-pointer (either directly through \textsf{previd} or indirectly through the
-interlink vector) to its immediately preceding block in the subchain (which
-corresponds to an ancestor block in the underlying blockchain). Because each
-pointer is proof-of-work committed in the interlink data structure, it suffices
-to collect the chosen blocks along with the proofs-of-inclusion. By cleverly
-choosing which blocks to collect, a full node can prove to a so-called
-\emph{superlite node} that the currently adopted longest blockchain is the
-claimed one without presenting the whole blockchain. Hence, instead of
-transmitting data linear in the chain size $\Theta(|\chain|)$ as SPV clients do,
-it is sufficient to transmit succinct certificates which are only of size
-$\Theta(\emph{poly}\log(|\chain|))$. Such certificates are called Non-Interactive
-Proofs of Proof-of-Work~\cite{nipopows}. The NIPoPoWs protocol is parameterized
-by a security parameter $m$ and requires $2m$ blocks to be included for each
-superblock level $\mu$ which contains at least $m$ blocks, except for the
-highest level $\mu$ for which only $m$ blocks need to be included. As the number
-of levels containing at least $m$ blocks is $\log(|\chain|) - \log(m)$, the
-number of blocks included in a NIPoPoW are $\log(|\chain|) - \log(m)$.
+Genesis in a manner which skips some unnecessary intermediary blocks and
+includes others. The idea is to convince a superlight verifier $V$, which only
+has access to the Genesis block, that a particular blockchain is the longest one
+without presenting all block headers. Blocks of interest that are part of the
+longest chain can then be revealed to $V$ in order to convince them that a
+particular transaction has been confirmed. In order to do that, $P$ finds a
+succinct sample of blocks and places it in chronological order. That sample is
+chosen such that each next block within the sample contains a pointer to its
+immediate ancestor within the sample by a commitment in the interlink vector.
+The prover $P$ sends each block of the sample to $V$, along with a
+proof-of-inclusion for the respective pointer. The verifier $V$ can check if the
+correct pointer has been included. By cleverly choosing which blocks to collect,
+a full node can prove to a superlight node that the currently adopted longest
+blockchain is the claimed one without presenting the whole blockchain. Hence,
+instead of transmitting data linear in the chain size $\Theta(|\chain|)$ as SPV
+clients do, it is sufficient to transmit succinct certificates which are only of
+size $\Theta(\emph{poly}\log(|\chain|))$. Such certificates are called
+Non-Interactive Proofs of Proof-of-Work~\cite{nipopows}. In this paper, we are
+not concerned about the mechanism by which the NIPoPoWs protocol samples blocks,
+but only the number of blocks in these samples and the sizes of their
+proofs-of-inclusion, which we optimize here.
+
+The NIPoPoWs protocol is parameterized by a security parameter $m$. The number
+of blocks $|\pi|$ in a given Non-Interactive Proof of Proof-of-Work sample is as
+follows. For each superblock level $\mu \in \mathbb{N}$, consider the
+blocks in the honestly adopted blockchain $\chain$. Among these, some
+are of level $\mu$, so denote the count of $\mu$-level superblocks in $\chain$
+as $|\chain\upchain^\mu|$. If $|\chain\upchain^\mu| \geq m$, then we call $\mu$
+an \emph{included level}. Consider the maximum included level $\max\mu$. It has
+been proven~\cite{nipopows} that $\max\mu = \log(|\chain|) - \log(m)$. The proof
+$\pi$ contains $m$ blocks for the maximum included level and $2m$ blocks for
+each lower level. Hence the number of blocks in a NIPoPoW is
+$|\pi| = m + 2m(\max\mu - 1) = m + 2m(\log(|\chain|) - \log(m))$. For each of
+these blocks, the proof contains the block hash and the respective
+proofs-of-inclusion for the pointer to the preceding ancestor. In this paper, we
+optimize the size of these proofs-of-inclusion, which gives a direct improvement
+to the size of such proofs $\pi$. We note that, in our proposed construction,
+we do not decrease the number of required blocks in $\pi$, only the bytes that
+need to be transmitted for it on the network.
+
+The size of these proofs is critical. As the majority of the time needed for
+mobile wallets to perform the initial synchronization with the network is spent
+on downloading block headers from the network, bringing down the proof size
+directly improves the performance of superlight clients. In the context of
+cross-chain transfers~\cite{pow-sidechains}, these proofs are posted and
+persistently stored in smart contracts~\cite{buterin,wood} within blockchains
+which function as SPV verifiers for other blockchains~\cite{christoglou}
+\TODO{TODO cite christoglou}. Improving their size has direct financial impact
+on the protocol, as a larger size incurs a larger gas cost for storage purposes.
