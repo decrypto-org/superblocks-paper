@@ -37,16 +37,16 @@ when $B$ was generated. For this purpose, it has been
 recommended~\cite{nipopows} that for each block $B$, instead of including only a
 pointer to the previous block, $\lg(|\chain|)$ pointers will be included, one
 for each level $\mu$ pointing to the most recent $\mu$-superblock preceding $B$.
-These pointers change the blockchain into a block skiplist \TODO{TODO skiplist
-citation}.
+These pointers change the blockchain into a block
+skiplist~\cite{skiplist,papadakis1993skip}.
 
 These $\lg(|\chain|)$ pointers per block are called the \emph{interlink}.
 One way to include them is to replace the \textsf{previd} pointer, which in
 typical blockchains points to the previous block hash, with the interlink list
 of block hashes to be included \emph{verbatim} in the block header.
 Alternatively, the interlink list of hashes can be
-organized into a compact data structure such as a Merkle tree~\cite{merkle}
-\TODO{TODO citation} containing one leaf per superblock level $\mu$. The number
+organized into a compact data structure such as a Merkle tree~\cite{merkletree}
+containing one leaf per superblock level $\mu$. The number
 of leafs in this Merkle tree is $\lg(|\chain|)$ and its height is
 $\lg\lg(|\chain|)$. Hence,
 proofs-of-inclusion in this Merkle tree are of size
@@ -65,9 +65,10 @@ does not harm security. Hence, it is possible to include the interlink data in a
 transaction. In this case, the transaction which includes the root of the
 interlink is called a \emph{velvet transaction} and its inclusion is termed a
 \emph{user-activated velvet fork}~\cite{gtklocker}. In practice, this
-transaction is implemented using an \textsf{OP\_RETURN} committing to the Merkle
-tree root containing the interlink list in its leafs. User-activated velvet
-forks allow the adoption of a new rule without requiring miners to upgrade their
+transaction is implemented using an
+\textsf{OP\_RETURN}~\cite{bartoletti2017analysis} committing to the Merkle tree
+root containing the interlink list in its leafs. User-activated velvet forks
+allow the adoption of a new rule without requiring miners to upgrade their
 software or be aware of the change, and are hence backwards-compatible.
 
 It is useful to be able to prove that a block $B$ contains a pointer to a
