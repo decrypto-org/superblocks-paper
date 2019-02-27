@@ -3,11 +3,18 @@
 In order to empirically assess the space efficiency of our improvement, we
 measured the size of the interlink data structure in the case of interlink
 \emph{lists}, the previously proposed format, and in the case of interlink
-\emph{sets}, our newly proposed format. Our results are illustrated in
-Figure~\ref{fig.set-list-vector-comparison}.
+\emph{sets}, our newly proposed format. We performed our measurements on the
+mainnet for both Bitcoin and Litecoin. Our results are illustrated in
+Figure~\ref{fig.set-list-vector-comparison} and are similar for both of these
+coins.
 
-Based on the theoretical analysis of Section~\ref{sec.construction}, we expected
-to see approximately an improvement of $50\%$ in this structure.
+The new data structure format yields savings of approximately $83\%$ on average.
+Based on the theoretical analysis of Section~\ref{sec.construction}, we expect
+to see approximately an improvement of $50\%$ in this structure. The extra
+$33\%$ is due to the explosion of difficulty in the mining power in both
+cryptocurrencies. The increased difficulty causes a lower variable difficulty
+target, meaning that the lowest portions of the superblock levels remain
+unoccupied, but are still accounted for in the interlink vector list approach.
 
 \begin{figure}
    \centering
