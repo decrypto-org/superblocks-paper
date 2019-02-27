@@ -5,7 +5,15 @@ contains one pointer per superblock level $\mu$, namely a pointer to the most
 recent superblock preceding $B$ of the respective level $\mu$. This
 construction, known as an \emph{interlink list}, is realized by inductively
 updating the interlink of the previous block, as shown in
-Algorithm~\ref{alg.interlink}. Trivially, genesis has an empty interlink.
+Algorithm~\ref{alg.interlink}. The algorithm works as follows. Trivially,
+genesis has an empty interlink vector, which forms our inductive basis. Given a
+newly mined block $B'$ which already has an interlink vector (the inductive
+hypothesis), we wish to construct the interlink vector to be included in the
+next block, which will point to $B'$ itself as well as some of the blocks that
+$B'$ points to. This is done by inspecting the existing interlink,
+$B'.\textsf{interlink}$, and constructing a new interlink $\textsf{interlink}$
+by replacing all the entries in $B'.\textsf{interlink}$ that are of level lower
+than $B'$ with $B'$ itself.
 
 \import{./}{algorithms/alg.interlink.tex}
 
