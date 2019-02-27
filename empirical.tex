@@ -58,4 +58,38 @@ in Figure~\ref{fig.set-list-proof-comparison}.
   \end{center}
 \end{figure*}
 
-\TODO{TODO: Explain gains attained due to variable difficulty}
+\begin{figure*}[h]
+\begin{center}
+  \includegraphics[width=0.95\textwidth]{figures/interlink-proof-savings-from-blockset.pdf}
+  \caption{Percentile savings of our block set construction compared to the
+           previously known block list construction.}
+  \label{fig.set-list-proof-comparison}
+  \end{center}
+\end{figure*}
+
+\TODO{TODO: Explain Figure~\ref{fig.set-list-proof-comparison}}
+
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c|cc|cc|cc|}
+      \hline
+      & \multicolumn{2}{c|}{\bf Interlink size}
+      & \multicolumn{2}{c|}{\bf Proof-of-inclusion size}
+      & \multicolumn{2}{c|}{\bf NIPoPoW size}\\
+      & blocks & bytes & blocks & bytes & blocks & bytes\\
+      \hhline{-------}
+      \textbf{Interlink lists}&
+      5 & 7 & 35 & 25 & 0 & 1\\
+      \hline
+      \makecell{\bf Interlink sets\\(this work)}&
+      5 & 7 & 35 & 25 & 0 & 1\\
+      \hline
+    \end{tabular}
+    \vspace{10pt}
+    \caption{A comparison of the two interlink constructions in terms of size.}
+    \label{tab:overview}
+  \end{center}
+\end{table}
+
+\TODO{TODO fill in exact numbers in above table}
+\TODO{TODO explain above table results and methodology}
