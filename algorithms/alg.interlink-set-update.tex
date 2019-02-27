@@ -1,0 +1,15 @@
+\begin{algorithm}[H]
+    \caption{\label{alg.interlink-set}Our proposed algorithm, updateInterlinkSet}
+    \begin{algorithmic}[1]
+        \Function{\sf updateInterlinkSet}{$B'$}
+            \Let{\textsf{interlinkSet}}{\{H(B')\}}
+            \For{$H(B) \in B'.\textsf{interlink}$}
+                \If{$\lfloor\log_2(H(B))\rfloor < \lfloor\log_2(H(B'))\rfloor$}
+                    \Let{\textsf{interlinkSet}}{\textsf{interlinkSet} \cup \{H(B)\}}
+                \EndIf
+            \EndFor
+            \State\Return{\textsf{interlinkSet}}
+        \EndFunction
+    \vskip8pt
+    \end{algorithmic}
+\end{algorithm}
