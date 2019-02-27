@@ -46,4 +46,6 @@ the $\mu^{\text{th}}$ digit after $n$ turns. Then we have that:
 \sum_{i = 1}^n 2^{-\mu} (1 - 2^{1 -\mu})^{n - (i + 1) + 1} &=\\
 \sum_{i = 1}^n 2^{-\mu} (1 - 2^{1 -\mu})^{n - i} &=\\
 2^{-\mu} \sum_{i = 1}^n (1 - 2^{1 -\mu})^{n - i} &=\\
+2^{-\mu} (1 - 2^{1 - \mu})^n \sum_{i = 1}^n (1 - 2^{1 -\mu})^{-i} &=\\
+2^{-\mu} \frac{(1 - 2^{1 - \mu})^n (1 - (1 - 2^{1-\mu})^{-n})}{(1 - 2^{1 - \mu})(1 - (1 - 2^{1 - \mu})^{-1})} &=\\
 \end{align*}
