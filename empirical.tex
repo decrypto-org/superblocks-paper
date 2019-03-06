@@ -6,7 +6,10 @@ measured the size of the interlink data structure in the case of interlink
 \emph{sets}, our newly proposed format. We performed our measurements on the
 mainnet for both Bitcoin and Litecoin. Our results are illustrated in
 Figure~\ref{fig.set-list-vector-comparison} and are similar for both of these
-coins.
+coins. The figures assume that both coins have been velvet forked from their
+geneses blocks to include the particular interlink vector format. This is
+indicative of the future performance of velvet forking each blockchain to add
+the respective interlink vector format.
 
 The new data structure format yields savings of approximately $83\%$ on average.
 Based on the theoretical analysis of Section~\ref{sec.construction}, we expect
@@ -87,9 +90,19 @@ in Figure~\ref{fig.set-list-proof-comparison}.
     \end{tabular}
     \vspace{10pt}
     \caption{A comparison of the two interlink constructions in terms of size.}
-    \label{tab:overview}
+    \label{tab.savings}
   \end{center}
 \end{table}
 
 \TODO{TODO fill in exact numbers in above table}
-\TODO{TODO explain above table results and methodology}
+
+We summarize the savings of our construction in Table~\ref{tab.savings}. The
+table was constructed by inspecting the current version of the Bitcoin
+blockchain at the time of writing. The interlink size column shows the average
+interlink vector size, in the number blocks and in concrete bytes assuming the
+\texttt{SHA256} function is used. The proof-of-inclusion size column shows the
+average size of a Merkle proof-of-inclusion, in blocks and in bytes, when the
+interlink vector is compacted into a Merkle tree using \texttt{SHA256}. Finally,
+the NIPoPoW size column shows the size of a NIPoPoW, in blocks and in bytes. The
+NIPoPoW sizes are calculated assuming Bitcoin was velvet forked since its
+Genesis to include the respective interlink representation. Our results indicate
