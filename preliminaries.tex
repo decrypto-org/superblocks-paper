@@ -119,9 +119,9 @@ are of level $\mu$, so denote the count of $\mu$-level superblocks in $\chain$
 as $|\chain\upchain^\mu|$. If $|\chain\upchain^\mu| \geq m$, then we call $\mu$
 an \emph{included level}. Consider the maximum included level $\max\mu$. It has
 been proven~\cite{nipopows} that $\max\mu = \log(|\chain|) - \log(m)$. The proof
-$\pi$ contains $m$ blocks for the maximum included level and $2m$ blocks for
-each lower level. Hence the number of blocks in a NIPoPoW is
-$|\pi| = m + 2m(\max\mu - 1) = m + 2m(\log(|\chain|) - \log(m))$. For each of
+$\pi$ contains $1.5m$ blocks for the maximum included level and $m$ additional blocks for
+each lower level in expectation. Hence the number of blocks in a NIPoPoW is
+$|\pi| = 1.5m + m \max\mu = 1.5m + m(\log(|\chain|) - \log(m))$. For each of
 these blocks, the proof contains the block hash and the respective
 proofs-of-inclusion for the pointer to the preceding ancestor. In this paper, we
 optimize the size of these proofs-of-inclusion, which gives a direct improvement
