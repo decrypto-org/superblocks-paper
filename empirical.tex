@@ -94,15 +94,20 @@ in Figure~\ref{fig.set-list-proof-comparison}.
   \end{center}
 \end{table}
 
-\TODO{TODO fill in exact numbers in above table}
-
 We summarize the savings of our construction in Table~\ref{tab.savings}. The
 table was constructed by inspecting the current version of the Bitcoin
 blockchain at the time of writing. The interlink size column shows the average
-interlink vector size, in the number blocks and in concrete bytes assuming the
-\texttt{SHA256} function is used. The proof-of-inclusion size column shows the
-average size of a Merkle proof-of-inclusion, in blocks and in bytes, when the
-interlink vector is compacted into a Merkle tree using \texttt{SHA256}. Finally,
-the NIPoPoW size column shows the size of a NIPoPoW, in blocks and in bytes. The
-NIPoPoW sizes are calculated assuming Bitcoin was velvet forked since its
-Genesis to include the respective interlink representation. Our results indicate
+interlink vector size, in the number of blockids and in concrete bytes assuming
+the \texttt{SHA256} function is used (as in Bitcoin). The proof-of-inclusion
+size column shows the average size of a Merkle proof-of-inclusion, in the number
+of hashes and in bytes, when the interlink vector is compacted into a Merkle
+tree using \texttt{SHA256} (as in Bitcoin). Finally, the NIPoPoW size column
+shows the size of a NIPoPoW in kilobytes. The NIPoPoW sizes are calculated
+assuming Bitcoin had included the respective interlink Merkle tree root in their
+headers since genesis. We measured the size of suffix-proof NIPoPoWs based on
+the recommended parameter $m = 15$~\cite{nipopows} assuming a chain size of $|C|
+= 563{,}451$. The number of blocks in a NIPoPoW is $(m(log |C| − log m) + 1.5m)
+= 250$ in expectation. For the final size calculation of the NIPoPoW, we
+included all the data required, including the proofs-of-inclusion as well as the
+auxiliary block header data needed. Our results indicate $79\%$ savings in the
+interlink sizes and $37\%$ savings in the NIPoPoW sizes.
