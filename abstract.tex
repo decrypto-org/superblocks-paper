@@ -10,11 +10,11 @@
   blockchain. We find that the superblock distribution within the blockchain
   follows expectation, hence we empirically verify that the distribution of superblocks within the Bitcoin blockchain has not been adversarially biased.
   NIPoPoWs require that each block in a blockchain points to a sample of previous blocks in the blockchain. These pointers form a data structure called the \emph{interlink}. We give efficient ways to store the
-  interlink data structure. We observe that repeated superblock references within an interlink can be omitted
+  interlink data structure. Repeated superblock references within an interlink can be omitted
   with no harm to security. Hence, it is more efficient to store a \emph{set} of
   superblocks rather than a \emph{list}. We show that, in honest
   executions, this simple observation reduces the number of superblock
   references by approximately a half in expectation. We then verify our theoretical
   result by measuring the improvement over existing blockchains in terms of the
-  interlink sizes (which we improve by $79\%$) and the sizes of succinct NIPoPoWs (which we improve by $37\%$). As such, our results allow superlight clients to synchronize $37\%$ faster than previous work.
+  interlink sizes (which we improve by $79\%$) and the sizes of succinct NIPoPoWs (which we improve by $37\%$). As such, we show that deduplication allows superlight clients to synchronize $37\%$ faster.
 \end{abstract}
