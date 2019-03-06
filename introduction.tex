@@ -13,10 +13,9 @@ created, which allow a client to synchronize with the longest blockchain without
 downloading all blocks. These so-called \emph{proofs of proof-of-work} contain
 only a small number of cleverly chosen superblocks which compact the
 proof-of-work of the blockchain into a succinct string, while maintaining the
-same security level as SPV clients. However, while the existence of superblocks
-has been theoretically posed and the protocol has even been deployed in
+same security level as SPV clients. However, while the protocol has even been deployed in
 practice, the distribution of superblocks within a blockchain has not been
-measured. In this paper, we provide measurements of this distribution for the
+previously measured. In this paper, we provide measurements of this distribution for the
 Bitcoin blockchain.
 
 In order for superblock sampling to work, it is necessary that each block
@@ -25,7 +24,7 @@ select pointers to some preceding superblocks. These pointers are organized in a
 special data structure, the \emph{interlink}. For relevant applications such as
 superlite clients and cross-chain transfers, it is critical that the interlink
 structure is compact. We measure the size of the interlink structure and provide
-a novel but simple optimization which can bring down its size to less than a
+a simple novel optimization which can bring down its size to less than a
 half. We then study the impact of this improvement on the size of proofs of
 proofs-of-work.
 
@@ -33,18 +32,19 @@ proofs-of-work.
 \textbf{Related work.}
 Superblocks were first observed to exist in~\cite{highway}.
 The interlink data structure was put forth in~\cite{popow}, where it was also
-observed that it can be organized into a Merkle tree. Interlinks containing more
-blocks than just superblocks or even all blocks have been
-proposed in~\cite{eip210,flyclient}. Interlinks have
+observed that it can be organized into a Merkle tree. Interlinks containing all
+the blocks of the blockchain have been
+proposed in~\cite{flyclient}. Superblock interlinks have
 been included from genesis in cryptocurrencies such as ERGO~\cite{ergo} and
-nimiq~\cite{nimiq}. In~\cite{nipopows}, the consumption of the interlink data to
+nimiq~\cite{nimiq}. Complete blockchain interlinks have been proposed for Ethereum~\cite{eip210}. In~\cite{nipopows}, the consumption of the interlink data to
 construct Non-Interactive Proofs of Proofs-of-Work was presented and concrete
 numbers were given about the sizes of such proofs. They also presented a way to
 construct such a structure without a soft or hard fork, but a backwards
 compatible \emph{velvet fork}, which was later explored in~\cite{velvet}.
-Bitcoin Cash has been velvet forked in this manner~\cite{gtklocker}. One
-application of NIPoPoWs is cross-chain transfers~\cite{pow-sidechains}
-with a proof-of-work blockchain source. Comparable
+Bitcoin Cash has been velvet forked in this manner~\cite{gtklocker}. Beyond
+superlight clients, another
+application of NIPoPoWs are cross-chain transfers~\cite{pow-sidechains}
+between proof-of-work blockchains. Comparable
 constructions have also appeared for proof-of-stake
 blockchains~\cite{pos-sidechains}.
 
@@ -55,7 +55,8 @@ follows:
 \begin{enumerate}
   \item We measure superblock distributions in Bitcoin. We observe that the
         distribution of superblocks follows expectation, indicating there are no
-        ongoing or historical attacks of \emph{badness}. We are the first to
+        ongoing or historical attempts to bias the distribution of superblocks
+        (so-called \emph{badness} attacks~\cite{nipopows}). We are the first to
         collect any empirical measurements of superblocks on real blockchains.
   \item We put forth the simple but important optimization in regards to the way
         blocks are compactly stored in an interlink tree by observing that
