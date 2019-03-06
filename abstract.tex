@@ -1,23 +1,20 @@
 \begin{abstract}
-  Blocks in proof-of-work blockchains satisfy the proof-of-work equation $H(B)
+  Blocks in proof-of-work (PoW) blockchains satisfy the PoW equation $H(B)
   \leq T$. If additionally a block satisfies $H(B) \leq T2^{-\mu}$, it is called
   a $\mu$-\emph{superblock}. Superblocks play an important role in the
   construction of compact blockchain proofs which allows the compression of
-  proof-of-work blockchains into so-called \emph{proof of proof-of-work}
-  certificates. In this work, we measure the distribution of superblocks in the
-  Bitcoin blockchain. We find that the superblock distribution within the blockchain
-  follows expectation, hence we empirically verify that these blockchains are
-  not under previously theoretically posed attacks of \emph{badness}. Given
-  these empirical statistics, we discuss efficient ways to store the
-  \emph{interlink} data structure, which is a data structure within blocks that
-  commits a reference to the most recent preceding $\mu$-superblock for
-  every $\mu \in \mathbb{N}$. We observe that, when constructing an interlink by collecting
-  superblocks into a Merkle tree, repeated superblock references can be omitted
-  with no harm to security. Hence, it is more efficient to store a set of
-  superblocks rather than a list. We analytically prove that, in honest
+  PoW blockchains into so-called \emph{Non-Interactive Proofs of Proof-of-Work} (NIPoPoWs). These certificates are essential for the construction of \emph{superlight}
+  clients, which are blockchain wallets that can synchronize exponentially faster than traditional SPV clients.
+
+  In this work, we measure the distribution of superblocks in the Bitcoin
+  blockchain. We find that the superblock distribution within the blockchain
+  follows expectation, hence we empirically verify that the distribution of superblocks within the Bitcoin blockchain has not been adversarially biased.
+  NIPoPoWs require that each block in a blockchain points to a sample of previous blocks in the blockchain. These pointers form a data structure called the \emph{interlink}. We give efficient ways to store the
+  interlink data structure. We observe that repeated superblock references within an interlink can be omitted
+  with no harm to security. Hence, it is more efficient to store a \emph{set} of
+  superblocks rather than a \emph{list}. We show that, in honest
   executions, this simple observation reduces the number of superblock
   references by approximately a half in expectation. We then verify our theoretical
   result by measuring the improvement over existing blockchains in terms of the
-  interlink sizes (which we improve by $79\%$) and the sizes of succinct proofs
-  of proof-of-work (which we improve by $37\%$).
+  interlink sizes (which we improve by $79\%$) and the sizes of succinct NIPoPoWs (which we improve by $37\%$). As such, our results allow superlight clients to synchronize $37\%$ faster than previous work.
 \end{abstract}
