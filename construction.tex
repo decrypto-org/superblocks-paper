@@ -85,11 +85,11 @@ obtained in the deterministic case are exactly $50\%$.
 
 \import{./}{algorithms/alg.tm.tex}
 
-For the probabilistic setting of real blockchains, each block generated has an
-independent probability of belonging to a given level. The process of block
-generation can be modelled precisely as follows. Consider the Turing Machine
-illustrated in Algorithm~\ref{alg.tm}. We begin with a one-sided infinite
-tape filled with the special symbol $\sqcup$. We then run the machine
+Consider now the probabilistic setting of real blockchains, where each block
+generated has an independent probability of belonging to a given level. The
+process of block generation can be modelled precisely as follows. Consider the
+Turing Machine illustrated in Algorithm~\ref{alg.tm}. We begin with a one-sided
+infinite tape filled with the special symbol $\sqcup$. We then run the machine
 illustrated in Algorithm~\ref{alg.tm} repeatedly over the same tape $n$ times.
 Once we have completed the $n$ runs, the tape contains a binary string, which
 follows the same distribution as the interlink mask of the $n^\text{th}$ block
@@ -99,7 +99,7 @@ a fair coin $b$. If the coin turns out to be $1$, the machine writes $1$ to the
 current position of the tape and exits. This is the event that the block
 generated has level exactly $0$. Otherwise, if the coin $b$ is a $0$, then the
 block generated has level above $0$, and so the first position of the interlink
-mask will be overwritten by a $0$. The machine machine then advances and
+mask will be overwritten by a $0$. The machine then advances and
 continues to flip coins and overwriting the tape with $0$s until a $1$ coinflip
 is attained, at which point it writes a $1$ and halts.
 
