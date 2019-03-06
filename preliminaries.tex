@@ -11,7 +11,9 @@ $\kappa$ bits, where $\kappa$ is the security parameter of the protocol and $T <
 the equation~\cite{popow}, namely that $H(B) \leq T2^{-\mu}$ for some $\mu \in
 \mathbb{N}$. Such blocks are called $\mu$-superblocks~\cite{nipopows}.
 It follows directly from the Random Oracle model that
-$\Pr[B \text{ is a } \mu\text{-superblock}|B \text{ is a valid block}] = 2^{-\mu}$.
+$\Pr[B \text{ is a } \mu\text{-superblock}|B \text{ is a valid block}] = 2^{-\mu}$. Note that if a block is a $\mu$-superblock for some $\mu > 0$, then it is
+also a $(\mu - 1)$-superblock. We denote the maximum $\mu$ of a block $B$ its
+$level(B) = \lfloor \log_2(T) - \log_2(H(B)) \rfloor$.
 
 The count of superblocks in a chain decreases exponentially as $\mu$ increases.
 If a blockchain $\chain$ generated in an honest execution has $|\chain|$ blocks,
