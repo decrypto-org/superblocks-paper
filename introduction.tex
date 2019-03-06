@@ -36,8 +36,7 @@ structure was put forth in~\cite{popow}, where it was also observed that it can
 be organized into a Merkle tree. Interlinks containing all the blocks of the
 blockchain have been proposed in~\cite{flyclient}. Superblock interlinks have
 been included from genesis in cryptocurrencies such as ERGO~\cite{ergo} and
-nimiq~\cite{nimiq}. Complete blockchain interlinks have been proposed for Ethereum~\cite{eip210}. Nimiq has independently applied interlink deduplication in practice to save space~\cite{nimiq-dev-ref}, but they do not organize their
-interlinks into Merkle Trees. In~\cite{nipopows}, the consumption of the interlink data to
+nimiq~\cite{nimiq}. Complete blockchain interlinks have been proposed for Ethereum~\cite{eip210}. Nimiq and ERGO have independently applied interlink deduplication in practice to save space~\cite{nimiq-dev-ref,ergo}. In~\cite{nipopows}, the consumption of the interlink data to
 construct Non-Interactive Proofs of Proof-of-Work was presented and concrete
 numbers were given about the sizes of such proofs. They also presented a way to
 construct such a structure without a soft or hard fork, but a backwards
@@ -63,8 +62,9 @@ follows:
         blocks are compactly stored in an interlink tree by observing that
         duplicate pointers can be removed without harming security. As such, we
         construct interlink \emph{block sets} instead of interlink \emph{block
-        lists}.\footnote{The deduplication optimization has already been deployed
-        independently by the Nimiq and the ERGO blockchains~\cite{nimiq-dev-ref,ergo}, but with no further analysis.}
+        lists}.\footnote{The deduplication optimization has already been
+        discovered and deployed independently by the Nimiq and the ERGO
+        blockchains~\cite{nimiq-dev-ref,ergo}, but with no further analysis.}
   \item We prove that our optimization reduces the number of pointers in each
         interlink by a half in expectation.
   \item We evaluate our improvement on the Bitcoin blockchain and collect
