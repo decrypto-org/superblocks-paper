@@ -74,20 +74,20 @@ in Figure~\ref{fig.set-list-proof-comparison}.
 
 \begin{table}[h!]
   \begin{center}
-    \begin{tabular}{|c|cc|cc|cc|}
+    \begin{tabularx}{\textwidth}{|c|YY|YY|c|}
       \hline
       & \multicolumn{2}{c|}{\bf Interlink size}
       & \multicolumn{2}{c|}{\bf Proof-of-inclusion size}
-      & \multicolumn{2}{c|}{\bf NIPoPoW size}\\
+      & \textbf{NIPoPoW size}\\
       & blockids & bytes & hashes & bytes & KB\\
-      \hhline{-------}
+      \hhline{------}
       \textbf{Interlink lists}&
       43.12 & 1380 & 5.7 & 183 & 44.79\\
       \hline
       \makecell{\bf Interlink sets\\(this work)}&
       9.04 & 289 & 3.6 & 116 & 28.28\\
       \hline
-    \end{tabular}
+    \end{tabularx}
     \vspace{10pt}
     \caption{A comparison of the two interlink constructions in terms of size.}
     \label{tab.savings}
