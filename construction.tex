@@ -69,6 +69,11 @@ illustrated in Figure~\ref{fig.deterministic}. In this blockchain, every block
 is a $0$-superblock, every other block is a $1$-superblock, every fourth block
 is a $2$-superblock and generally every $2^\mu$-th block is a
 $\mu$-superblock.
+In this thought experiment, the interlink mask behaves like a binary number
+which is increased by $1$ after every block is generated. As such, it will be a
+$\mu$-digit binary number. As the process passes through all $\mu$-digit binary
+numbers, the number of $0$s and $1$s is on average equal. Hence, the savings
+obtained in the deterministic case are exactly $50\%$.
 
 \begin{figure*}[h]
 \begin{center}
@@ -77,12 +82,6 @@ $\mu$-superblock.
   \label{fig.deterministic}
   \end{center}
 \end{figure*}
-
-In this thought experiment, the interlink mask behaves like a binary number
-which is increased by $1$ after every block is generated. As such, it will be a
-$\mu$-digit binary number. As the process passes through all binary numbers, the
-number of $0$s and $1$s is on average equal. Hence, the savings obtained in the
-deterministic case are exactly $50\%$.
 
 \import{./}{algorithms/alg.tm.tex}
 
@@ -109,10 +108,8 @@ the $\mu^{\text{th}}$ digit after $n$ such runs. We have that:
 
 \begin{align*}
 \Pr[B^n_\mu = 1] =
-\sum_{i = 1}^n 2^{-\mu} \prod_{j = i + 1}^n \sum_{\mu' = 1}^{\mu - 1} 2^{-\mu'} &=\\
-\sum_{i = 1}^n 2^{-\mu} \prod_{j = i + 1}^n (1 - 2^{1 - \mu}) &=\\
-\sum_{i = 1}^n 2^{-\mu} (1 - 2^{1 -\mu})^{n - (i + 1) + 1} &=\\
-\frac{1}{2} (1 - (1 - 2^{1 - \mu})^n) &=\\
+\sum_{i = 1}^n 2^{-\mu} \prod_{j = i + 1}^n \sum_{\mu' = 1}^{\mu - 1} 2^{-\mu'} &= \sum_{i = 1}^n 2^{-\mu} \prod_{j = i + 1}^n (1 - 2^{1 - \mu}) &=\\
+\sum_{i = 1}^n 2^{-\mu} (1 - 2^{1 -\mu})^{n - (i + 1) + 1} &= \frac{1}{2} (1 - (1 - 2^{1 - \mu})^n)
 \end{align*}
 
 Let $B$ denote the number of $1$s in the interlink mask. Its expectation is then
