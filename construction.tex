@@ -42,6 +42,49 @@ needs. On the other hand, the verifier only needs to ensure that the claimed
 superblock level is attained, but this can be done directly by inspecting the
 hash sent to it by the prover.
 
+We now analyze the savings attained by the above method. We first analyze the
+savings in a thought experiment of an ideal, deterministic execution of the
+blockchain protocol. While this setting is not realistic, it provides good
+intuition about the interlink structure. Subsequently, we analyze the real
+probabilistic blockchain protocol. In any case, consider a blockchain of $n$
+blocks.
+
+\begin{definition}
+Define the \emph{interlink mask} of a block $B$ to be the bitstring containing
+one bit per superblock level $\mu$. At the position $\mu$ the bitstring contains
+a $1$ if the most recent $\mu$-superblock ancestor of $B$ differs from the most
+recent $(\mu+1)$-superblock ancestor of $B$. Otherwise, it contains a $0$.
+\end{definition}
+
+This mask contains a $0$ at the position of duplicates which can be eliminated.
+To measure the efficiency of our optimization scheme, we wish to count how many
+$0$s are contained in the interlink mask of a given block. Consider, for
+example, the block highlighted with a dashed border in
+Figure~\ref{fig.deterministic}. Its interlink vector will have an interlink mask
+of $0101$. The first $0$ is due to the previous block which happened to be a
+$1$-superblock. The latter $0$ is due to the most recent $3$-superblock
+overshadowing the preceding $2$-superblock.
+
+In our deterministic thought experiment, consider a blockchain which grows as
+illustrated in Figure~\ref{fig.deterministic}. In this blockchain, every block
+is a $0$-superblock, every other block is a $1$-superblock, every fourth block
+is a $2$-superblock and generally every $2^\mu$-th block is a
+$\mu$-superblock.
+
+\begin{figure*}[h]
+\begin{center}
+  \includegraphics[width=0.95\textwidth]{figures/deterministic-superblocks.pdf}
+  \caption{A thought experiment of a deterministically generated blockchain}
+  \label{fig.deterministic}
+  \end{center}
+\end{figure*}
+
+In this thought experiment, the interlink mask behaves like a binary number
+which is increased by $1$ after every block is generated. As such, it will be a
+$\mu$-digit binary number. As the process passes through all binary numbers, the
+number of $0$s and $1$s is on average equal. Hence, the savings obtained in the
+deterministic case are exactly $50\%$.
+
 
 Let $B^n_\mu \in \{0, 1\}$ denote the random variable containing the value of
 the $\mu^{\text{th}}$ digit after $n$ turns. Then we have that:
