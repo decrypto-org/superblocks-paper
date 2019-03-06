@@ -2,8 +2,9 @@
 
 Bitcoin~\cite{bitcoin} and other blockchains which use the same backbone
 consensus mechanism~\cite{EC:GarKiaLeo15} use Simple Payment Verification (SPV)
-to shorten the synchronization time for lightweight clients. Recently, a
-line of work has introduced \emph{superlight} clients, which do not require all
+to shorten the synchronization time for lightweight clients, where the clients
+need to download block headers instead of whole blocks. Recently, a line of
+work has introduced \emph{superlight} clients, which do not require all
 blockchain headers to be downloaded, but, rather, only a sample of them. This
 sample consists of blocks which happen to achieve a higher difficulty than the
 required one, and are thus termed \emph{superblocks}.
