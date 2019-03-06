@@ -31,14 +31,16 @@ costly to mount.
 For any block $B$,
 it is useful to be able to refer to its most recent preceding $\mu$-superblock
 for any $\mu \in \mathbb{N}$. In addition, it is useful to include this
-reference to the contents of the block to which proof-of-work is being applied
-so that the miner proves that she had knowledge of the preceding superblocks
+reference within the contents of the block to which proof-of-work is being applied
+so that the miner proves that she had knowledge of the preceding superblock
 when $B$ was generated. For this purpose, it has been
 recommended~\cite{nipopows} that for each block $B$, instead of including only a
 pointer to the previous block, $\lg(|\chain|)$ pointers will be included, one
 for each level $\mu$ pointing to the most recent $\mu$-superblock preceding $B$.
-These pointers change the blockchain into a block
-skiplist~\cite{skiplist,papadakis1993skip}.
+Hence, under this modification, every block contains a pointer to its most
+recent $0$-superblock ancestor, its most recent $1$-superblock ancestor, and so
+on, of which there are $\lg(|\chain|)$. These pointers change the blockchain
+into a block skiplist~\cite{skiplist,papadakis1993skip}.
 
 These $\lg(|\chain|)$ pointers per block are called the \emph{interlink}.
 One way to include them is to replace the \textsf{previd} pointer, which in
@@ -82,7 +84,7 @@ $tx$. The velvet transaction $tx$ commits to auxiliary data which includes the
 interlink Merkle tree root $mtr_2$.
 Secondly, another Merkle tree proof-of-inclusion $\pi_2$ proves that $mtr_2$
 contains the hash of $B'$. While we cannot improve the size of $\pi_1$, in this
-paper we aim to improve the size of $\pi_2$.
+paper we describe the improvement in the size of $\pi_2$.
 
 Superblock pointers can be used to traverse the blockchain from the tip back to
 Genesis in a manner which skips some unnecessary intermediary blocks and
