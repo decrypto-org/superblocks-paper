@@ -12,8 +12,8 @@ hypothesis), we wish to construct the interlink vector to be included in the
 next block, which will point to $B'$ itself as well as some of the blocks that
 $B'$ points to. This is done by inspecting the existing interlink,
 $B'.\textsf{interlink}$, and constructing a new interlink $\textsf{interlink}$
-by replacing all the entries in $B'.\textsf{interlink}$ that are of level lower
-than $B'$ with $B'$ itself.
+by replacing all the entries in $B'.\textsf{interlink}$ that are of level less
+than or equal to that of $B'$ with $B'$ itself.
 
 \import{./}{algorithms/alg.interlink.tex}
 
@@ -26,7 +26,7 @@ structure as Algorithm~\ref{alg.interlink}, but with duplicates removed. The
 algorithm operates as follows. Given an existing interlink set,
 $B'.\textsf{interlinkSet}$, it produces a new set $\textsf{interlinkSet}$ which
 contains $B'$ and all the same blocks as $B'.\textsf{interlinkSet}$ with the
-exception of those that are of inferior superblock level than $B'$.
+exception of those that are of equal or inferior superblock level to $B'$.
 
 Naturally, when this interlink set is to be committed to a Merkle tree, it must
 be ordered in a canonical matter (for example, by increasing block level) so

@@ -11,7 +11,7 @@ $\kappa$ bits, where $\kappa$ is the security parameter of the protocol and $T <
 the equation~\cite{popow}, namely that $H(B) \leq T2^{-\mu}$ for some $\mu \in
 \mathbb{N}$. Such blocks are called $\mu$-superblocks~\cite{nipopows}.
 It follows directly from the Random Oracle model that
-$\Pr[B \text{ is a } \mu\text{-superblock}|B \text{ valid block}] = 2^{-\mu}$.
+$\Pr[B \text{ is a } \mu\text{-superblock}|B \text{ is a valid block}] = 2^{-\mu}$.
 
 The count of superblocks in a chain decreases exponentially as $\mu$ increases.
 If a blockchain $\chain$ generated in an honest execution has $|\chain|$ blocks,
@@ -32,7 +32,7 @@ For any block $B$,
 it is useful to be able to refer to its most recent preceding $\mu$-superblock
 for any $\mu \in \mathbb{N}$. In addition, it is useful to include this
 reference to the contents of the block to which proof-of-work is being applied
-so that the miner proves that she had knownledge of the preceding superblock
+so that the miner proves that she had knowledge of the preceding superblocks
 when $B$ was generated. For this purpose, it has been
 recommended~\cite{nipopows} that for each block $B$, instead of including only a
 pointer to the previous block, $\lg(|\chain|)$ pointers will be included, one
