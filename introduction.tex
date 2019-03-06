@@ -36,16 +36,17 @@ structure was put forth in~\cite{popow}, where it was also observed that it can
 be organized into a Merkle tree. Interlinks containing all the blocks of the
 blockchain have been proposed in~\cite{flyclient}. Superblock interlinks have
 been included from genesis in cryptocurrencies such as ERGO~\cite{ergo} and
-nimiq~\cite{nimiq}.  Complete blockchain interlinks have been proposed for
-Ethereum~\cite{eip210}.  In~\cite{nipopows}, the consumption of the interlink
-data to construct Non-Interactive Proofs of Proof-of-Work was presented and
-concrete numbers were given about the sizes of such proofs. They also presented
-a way to construct such a structure without a soft or hard fork, but a
-backwards compatible \emph{velvet fork}, which was later explored
-in~\cite{velvet}.  Bitcoin Cash has been velvet forked in this
-manner~\cite{gtklocker}. Beyond superlight clients, another application of
-NIPoPoWs are cross-chain transfers~\cite{pow-sidechains} between proof-of-work
-blockchains. Comparable constructions have also appeared for proof-of-stake
+nimiq~\cite{nimiq}. Complete blockchain interlinks have been proposed for Ethereum~\cite{eip210}. Nimiq has independently applied interlink deduplication in practice to save space~\cite{nimiq-dev-ref}, but they do not organize their
+interlinks into Merkle Trees. In~\cite{nipopows}, the consumption of the interlink data to
+construct Non-Interactive Proofs of Proof-of-Work was presented and concrete
+numbers were given about the sizes of such proofs. They also presented a way to
+construct such a structure without a soft or hard fork, but a backwards
+compatible \emph{velvet fork}, which was later explored in~\cite{velvet}.
+Bitcoin Cash has been velvet forked in this manner~\cite{gtklocker}. Beyond
+superlight clients, another
+application of NIPoPoWs are cross-chain transfers~\cite{pow-sidechains}
+between proof-of-work blockchains. Comparable
+constructions have also appeared for proof-of-stake
 blockchains~\cite{pos-sidechains}.
 
 \noindent
@@ -58,13 +59,16 @@ follows:
         ongoing or historical attempts to bias the distribution of superblocks
         (so-called \emph{badness} attacks~\cite{nipopows}). We are the first to
         collect any empirical measurements of superblocks on real blockchains.
-  \item We put forth the simple but important optimization in regards to the way
+  \item We describe the simple but important optimization in regards to the way
         blocks are compactly stored in an interlink tree by observing that
         duplicate pointers can be removed without harming security. As such, we
         construct interlink \emph{block sets} instead of interlink \emph{block
-        lists}. To our knowledge, no implementation currently does this, but all
-        existing implementations could benefit by applying this straightforward
-        modification.
+        lists}.\footnote{The deduplication optimization has already been deployed
+        independently by the Nimiq blockchain~\cite{nimiq-dev-ref}, but they do
+        not organize their interlink into a Merkle tree. Thus, their
+        construction requires sending the complete list of $\Theta(\lg(|C|))$
+        superblocks rather than a $\Theta(\lg\lg(|C|))$ inclusion proof for each
+        block, yielding worse proof sizes than the present work.}
   \item We prove that our optimization reduces the number of pointers in each
         interlink by a half in expectation.
   \item We evaluate our improvement on the Bitcoin blockchain and collect
