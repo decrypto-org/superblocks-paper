@@ -51,7 +51,8 @@ probabilistic blockchain protocol. Consider a blockchain of $n$ blocks.
 Define the \emph{interlink mask} of a block $B$ to be the bitstring containing
 one bit per superblock level $\mu$. At the position $\mu$, the bitstring contains
 a $1$ if the most recent $\mu$-superblock ancestor of $B$ differs from the most
-recent $(\mu+1)$-superblock ancestor of $B$. Otherwise, it contains a $0$.
+recent $(\mu+1)$-superblock ancestor of $B$, or if no $(\mu+1)$-superblock
+ancestor exists. Otherwise, it contains a $0$.
 \end{definition}
 
 This mask contains a $0$ at the position of duplicates which can be eliminated.
