@@ -101,7 +101,13 @@ generated has level exactly $0$. Otherwise, if the coin $b$ is a $0$, then the
 block generated has level above $0$, and so the first position of the interlink
 mask will be overwritten by a $0$. The machine then advances and
 continues to flip coins and overwriting the tape with $0$s until a $1$ coinflip
-is attained, at which point it writes a $1$ and halts.
+is attained, at which point it writes a $1$ and halts. The probability of the
+machine halting at position $\mu$ or later is $2^{-\mu}$, modeling the
+probability of a block being a $\mu$-superblock. The machine overwrites with $0$
+the positions in the tape which are of inferior level compared to the block
+level it will generate at the given run. This is the same process by which
+superblocks of higher level overshadow preceding superblocks of lower levels by
+occupying their space with duplicate pointers that can be eliminated.
 
 Let $B^n_\mu \in \{0, 1\}$ denote the random variable containing the value of
 the $\mu^{\text{th}}$ digit after $n$ such runs. We have that:
