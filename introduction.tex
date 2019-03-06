@@ -27,26 +27,25 @@ superlite clients and cross-chain transfers, it is critical that the interlink
 structure is compact. We measure the size of the interlink structure and provide
 a simple novel optimization which can bring down its size to less than a
 half. We then study the impact of this improvement on the size of proofs of
-proofs-of-work.
+proof-of-work.
 
 \noindent
 \textbf{Related work.}
-Superblocks were first observed to exist in~\cite{highway}.
-The interlink data structure was put forth in~\cite{popow}, where it was also
-observed that it can be organized into a Merkle tree. Interlinks containing all
-the blocks of the blockchain have been
-proposed in~\cite{flyclient}. Superblock interlinks have
+Superblocks were first observed to exist in~\cite{highway}.  The interlink data
+structure was put forth in~\cite{popow}, where it was also observed that it can
+be organized into a Merkle tree. Interlinks containing all the blocks of the
+blockchain have been proposed in~\cite{flyclient}. Superblock interlinks have
 been included from genesis in cryptocurrencies such as ERGO~\cite{ergo} and
-nimiq~\cite{nimiq}. Complete blockchain interlinks have been proposed for Ethereum~\cite{eip210}. In~\cite{nipopows}, the consumption of the interlink data to
-construct Non-Interactive Proofs of Proofs-of-Work was presented and concrete
-numbers were given about the sizes of such proofs. They also presented a way to
-construct such a structure without a soft or hard fork, but a backwards
-compatible \emph{velvet fork}, which was later explored in~\cite{velvet}.
-Bitcoin Cash has been velvet forked in this manner~\cite{gtklocker}. Beyond
-superlight clients, another
-application of NIPoPoWs are cross-chain transfers~\cite{pow-sidechains}
-between proof-of-work blockchains. Comparable
-constructions have also appeared for proof-of-stake
+nimiq~\cite{nimiq}.  Complete blockchain interlinks have been proposed for
+Ethereum~\cite{eip210}.  In~\cite{nipopows}, the consumption of the interlink
+data to construct Non-Interactive Proofs of Proof-of-Work was presented and
+concrete numbers were given about the sizes of such proofs. They also presented
+a way to construct such a structure without a soft or hard fork, but a
+backwards compatible \emph{velvet fork}, which was later explored
+in~\cite{velvet}.  Bitcoin Cash has been velvet forked in this
+manner~\cite{gtklocker}. Beyond superlight clients, another application of
+NIPoPoWs are cross-chain transfers~\cite{pow-sidechains} between proof-of-work
+blockchains. Comparable constructions have also appeared for proof-of-stake
 blockchains~\cite{pos-sidechains}.
 
 \noindent
