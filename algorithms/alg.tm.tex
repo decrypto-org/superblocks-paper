@@ -1,0 +1,19 @@
+\begin{algorithm}[H]
+    \caption{\label{alg.tm}The Turing Machine modeling interlink generation.}
+    \begin{algorithmic}[1]
+        \Function{\sf run}{\textsf{tape}}
+            \Let{\mu}{0}
+            \While{true}
+                \State{$b \sample \{0, 1\}$}
+                \If{b = 0}
+                    \Let{\textsf{tape}[\mu]}{1}
+                    \State\Return
+                \EndIf
+                \Let{\textsf{tape}[\mu]}{0}
+                \Let{\mu}{\mu + 1}
+            \EndWhile
+            \State\Return{\textsf{tape}}
+        \EndFunction
+    \vskip8pt
+    \end{algorithmic}
+\end{algorithm}
