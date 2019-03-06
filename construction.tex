@@ -35,6 +35,13 @@ that its root can be deterministically reproduced and detected. This canonical
 ordering may now not be trivial as was in the case for interlink lists and must
 be specified by the implementation.
 
+We remark that it does not matter for security purposes whether duplicates are
+removed. The reason is that the prover has access to the whole list of blocks
+references within the interlink Merkle tree, and hence can choose the one it
+needs. On the other hand, the verifier only needs to ensure that the claimed
+superblock level is attained, but this can be done directly by inspecting the
+hash sent to it by the prover.
+
 
 Let $B^n_\mu \in \{0, 1\}$ denote the random variable containing the value of
 the $\mu^{\text{th}}$ digit after $n$ turns. Then we have that:
