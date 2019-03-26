@@ -122,7 +122,8 @@ Let $B$ denote the number of $1$s in the interlink mask. Its expectation is then
 
 \[
   \EX[B] = \EX[\sum_{\mu = 1}^\infty B^n_\mu] =
-  \sum_{\mu = 1}^\infty \frac{1}{2} (1 - (1 - 2^{1 - \mu})^n)
+  \sum_{\mu = 1}^\infty \frac{1}{2} (1 - (1 - 2^{1 - \mu})^n) =
+  \frac{1}{2} \sum_{i = 1}^n (-1)^{i+1} {n \choose i} \frac{2^i}{2^i - 1}
 \]
 
 This series converges to a $\Theta(\log(n))$ function which is close to
