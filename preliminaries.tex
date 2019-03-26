@@ -13,7 +13,7 @@ the equation~\cite{popow}, namely that $H(B) \leq T2^{-\mu}$ for some $\mu \in
 It follows directly from the Random Oracle model that
 $\Pr[B \text{ is a } \mu\text{-superblock}|B \text{ is a valid block}] = 2^{-\mu}$. Note that if a block is a $\mu$-superblock for some $\mu > 0$, then it is
 also a $(\mu - 1)$-superblock. We denote the maximum $\mu$ of a block $B$ its
-$level(B) = \lfloor \log_2(T) - \log_2(H(B)) \rfloor$.
+$level(B) = \lfloor \lg(T) - \lg(H(B)) \rfloor$.
 
 The count of superblocks in a chain decreases exponentially as $\mu$ increases.
 If a blockchain $\chain$ generated in an honest execution has $|\chain|$ blocks,
@@ -118,10 +118,10 @@ blocks in the honestly adopted blockchain $\chain$. Among these, some
 are of level $\mu$, so denote the count of $\mu$-level superblocks in $\chain$
 as $|\chain\upchain^\mu|$. If $|\chain\upchain^\mu| \geq m$, then we call $\mu$
 an \emph{included level}. Consider the maximum included level $\max\mu$. It has
-been proven~\cite{nipopows} that $\max\mu = \log(|\chain|) - \log(m)$. The proof
+been proven~\cite{nipopows} that $\max\mu = \lg(|\chain|) - \lg(m)$. The proof
 $\pi$ contains $1.5m$ blocks for the maximum included level and $m$ additional blocks for
 each lower level in expectation. Hence the number of blocks in a NIPoPoW is
-$|\pi| = 1.5m + m \max\mu = 1.5m + m(\log(|\chain|) - \log(m))$. For each of
+$|\pi| = 1.5m + m \max\mu = 1.5m + m(\lg(|\chain|) - \lg(m))$. For each of
 these blocks, the proof contains the block hash and the respective
 proofs-of-inclusion for the pointer to the preceding ancestor. In this paper, we
 optimize the size of these proofs-of-inclusion, which gives a direct improvement
