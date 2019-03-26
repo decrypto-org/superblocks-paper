@@ -118,10 +118,11 @@ the $\mu^{\text{th}}$ digit after $n$ such runs. We have that:
 \sum_{i = 1}^n 2^{-\mu} (1 - 2^{1 -\mu})^{n - (i + 1) + 1} &= \frac{1}{2} (1 - (1 - 2^{1 - \mu})^n)
 \end{align*}
 
-Let $B$ denote the number of $1$s in the interlink mask. Its expectation is then
+Let $B^n$ denote the number of $1$s in the interlink mask after $n$ runs. Its
+expectation is then
 
 \[
-  \EX[B] = \EX[\sum_{\mu = 1}^\infty B^n_\mu] =
+  \EX[B^n] = \EX[\sum_{\mu = 1}^\infty B^n_\mu] =
   \sum_{\mu = 1}^\infty \frac{1}{2} (1 - (1 - 2^{1 - \mu})^n) =
   \frac{1}{2} \sum_{i = 1}^n (-1)^{i+1} {n \choose i} \frac{2^i}{2^i - 1}
 \]
