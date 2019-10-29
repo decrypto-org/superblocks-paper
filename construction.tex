@@ -139,4 +139,40 @@ savings of approximately $43\%$.
   \end{center}
 \end{figure*}
 
+\begin{lemma}
+  For any integers $i > 0$ and $k \ge 0$,
+  \[
+    \frac{2^i}{2^i-1} = \frac{1}{2^{(k+1)i}-2^{ki}} + \sum_{j=0}^k 2^{-ij}
+  \]
+\end{lemma}
+\begin{proof}
+  We work using induction on $k$.
+
+  \noindent
+  \textbf{Base case.}
+  For $k=0$ we have,
+
+  \begin{align*}
+    \frac{1}{2^{(k+1)i}-2^{ki}} + \sum_{j=0}^k 2^{-ij}
+    &= \frac{1}{2^i-2^0} + 2^0 \\
+    &= \frac{1}{2^i-1} + 1 = \frac{2^i}{2^i-1} \\
+  \end{align*}
+
+  \noindent
+  \textbf{Inductive hypothesis.}
+  Assume the statement holds for some arbitrary $k \ge 0$.
+
+  \noindent
+  \textbf{Inductive step.}
+  We prove the statement for $k+1$.
+
+  \begin{align*}
+    \frac{1}{2^{(k+1+1)i}-2^{(k+1)i}} + \sum_{j=0}^{k+1} 2^{-ij}
+    &= 2^{-i} (\frac{1}{2^{(k+1)i}-2^{ki}} + \sum_{j=0}^{k+1} 2^{-i(j-1)}) \\
+    &= 2^{-i} (\frac{1}{2^{(k+1)i}-2^{ki}} + \sum_{j=-1}^{k} 2^{-ij}) \\
+    &= 2^{-i} (\frac{1}{2^{(k+1)i}-2^{ki}} + \sum_{j=0}^{k} 2^{-ij} + 2^i) \\
+    &= 2^{-i} (\frac{2^i}{2^i-1} + 2^i) = \frac{1}{2^i-1} + 1 = \frac{2^i}{2^i-1} \\
+  \end{align*}
+\end{proof}
+
 We obtain that $\EX[B^n] < \frac{1}{2}(\lg(n)+2+e)$. Therefore the expected savings are $\lg(n) - \EX[B^n] > \frac{1}{2}(\lg(n)-2-e)$. Solving for $n$ we obtain that $n > 111$ for savings to exist.
