@@ -175,4 +175,18 @@ savings of approximately $43\%$.
   \end{align*}
 \end{proof}
 
+\begin{lemma}
+  For any positive integers $n$ and $k=\lceil \lg(n) \rceil$,
+  \[
+    -\sum_{i=1}^n (-1)^n {n \choose i} \sum_{j=0}^k 2^{-ij} < \lg(n) + 2
+  \]
+\end{lemma}
+\begin{proof}
+  \begin{align*}
+    -\sum_{i=1}^n (-1)^n {n \choose i} \sum_{j=0}^k 2^{-ij}
+    &= k+1 - \sum_{j=0}^k \sum_{i=0}^n (-1)^i {n \choose i} 2^{-ij} \\
+    &= k+1 - \sum_{j=0}^k (1-2^{-j})^n < \lg(n) + 2 \\
+  \end{align*}
+\end{proof}
+
 We obtain that $\EX[B^n] < \frac{1}{2}(\lg(n)+2+e)$. Therefore the expected savings are $\lg(n) - \EX[B^n] > \frac{1}{2}(\lg(n)-2-e)$. Solving for $n$ we obtain that $n > 111$ for savings to exist.
