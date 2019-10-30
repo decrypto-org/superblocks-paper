@@ -205,5 +205,18 @@ savings of approximately $43\%$.
   \end{align*}
 \end{proof}
 
+\begin{theorem}
+  \[
+    \EX[B^n] < \frac{1}{2}(\lg(n)+2+e)
+  \]
+\end{theorem}
+\begin{proof}
+  \begin{align*}
+    \EX[B^n]
+    &= -\frac{1}{2} \sum_{i = 1}^n (-1)^i {n \choose i} \frac{2^i}{2^i - 1} \\
+    &= \frac{1}{2}((-\sum_{i=1}^n (-1)^i {n \choose i} \sum_{j=0}^k 2^{-ij}) + (-\sum_{i=1}^n (-1)^i {n \choose i} \frac{1}{2^{(k+1)i} - 2^{ki}})) \\
+    &< \frac{1}{2}((\lg(n) + 2) + e)
+  \end{align*}
+\end{proof}
 
 We obtain that $\EX[B^n] < \frac{1}{2}(\lg(n)+2+e)$. Therefore the expected savings are $\lg(n) - \EX[B^n] > \frac{1}{2}(\lg(n)-2-e)$. Solving for $n$ we obtain that $n > 111$ for savings to exist.
