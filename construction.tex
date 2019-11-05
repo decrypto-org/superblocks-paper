@@ -127,18 +127,6 @@ expectation is then
   \frac{1}{2} \sum_{i = 1}^n (-1)^{i+1} {n \choose i} \frac{2^i}{2^i - 1}
 \]
 
-This series converges to a $\Theta(\lg(n))$ function which is close to
-$0.57 \cdot \lg(n)$ as illustrated in Figure~\ref{fig.log2}, indicating
-savings of approximately $43\%$.
-
-\begin{figure*}[h]
-\begin{center}
-  \includegraphics[width=0.55\textwidth]{figures/exp_blockset_size.pdf}
-  \caption{The expected number of unique interlink pointers in a block.}
-  \label{fig.log2}
-  \end{center}
-\end{figure*}
-
 \begin{lemma}
   For any integers $i > 0$ and $k \ge 0$,
   \[
