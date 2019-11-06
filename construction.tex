@@ -188,8 +188,8 @@ expectation is then
   \begin{align*}
     -\sum_{i=1}^n (-1)^i {n \choose i} \frac{1}{2^{(k+1)i} - 2^{ki}}
     &\le \sum_{i=1}^n {n \choose i} \frac{1}{2^{(k+1)i} - 2^{ki}} \\
-    &< \sum_{i=0}^n {n \choose i} \frac{1}{2^{ki}(2^i-1)} \\
-    &< \sum_{i=0}^n {n \choose i} \frac{1}{2^{ki}} \\
+    &= \sum_{i=1}^n {n \choose i} \frac{1}{2^{ki}(2^i-1)} \\
+    &\le \sum_{i=1}^n {n \choose i} \frac{1}{2^{ki}} \\
     &\le \sum_{i=0}^n {n \choose i} \frac{1}{n^i} \\
     &= (1+\frac{1}{n})^n < e && \text{(binomial expansion)} \\
   \end{align*}
