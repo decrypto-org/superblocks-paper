@@ -134,11 +134,7 @@ expectation is then
   \]
 \end{lemma}
 \begin{proof}
-  We work using induction on $k$.
-
-  \noindent
-  \textbf{Base case.}
-  For $k=0$ we have,
+  By induction on $k$. Clearly it holds for $k=0$:
 
   \begin{align*}
     \frac{1}{2^{(k+1)i}-2^{ki}} + \sum_{j=0}^k 2^{-ij}
@@ -146,13 +142,7 @@ expectation is then
     &= \frac{1}{2^i-1} + 1 = \frac{2^i}{2^i-1} \\
   \end{align*}
 
-  \noindent
-  \textbf{Inductive hypothesis.}
-  Assume the statement holds for some arbitrary $k \ge 0$.
-
-  \noindent
-  \textbf{Inductive step.}
-  We prove the statement for $k+1$.
+  For $k>0$ we have:
 
   \begin{align*}
     \frac{1}{2^{(k+1+1)i}-2^{(k+1)i}} + \sum_{j=0}^{k+1} 2^{-ij}
