@@ -166,7 +166,7 @@ We will now show that the savings from the interlink set technique are significa
     -\sum_{i=1}^n (-1)^i {n \choose i} \sum_{j=0}^k 2^{-ij}
     &= k+1 - \sum_{j=0}^k \sum_{i=0}^n (-1)^i {n \choose i} 2^{-ij} \\
     &= k+1 - \sum_{j=0}^k \sum_{i=0}^n {n \choose i} (-2^{-j})^i \\
-    &= k+1 - \sum_{j=0}^k (1-2^{-j})^n < \lg(n) + 2 && \text{(binomial expansion)} \\
+    &= k+1 - \sum_{j=0}^k (1-2^{-j})^n < \lg(n) + 2 \\
   \end{align*}
 \end{proof}
 
@@ -183,7 +183,7 @@ We will now show that the savings from the interlink set technique are significa
     &= \sum_{i=1}^n {n \choose i} \frac{1}{2^{ki}(2^i-1)} \\
     &\le \sum_{i=1}^n {n \choose i} \frac{1}{2^{ki}} \\
     &\le \sum_{i=0}^n {n \choose i} \frac{1}{n^i} \\
-    &= (1+\frac{1}{n})^n < e && \text{(binomial expansion)} \\
+    &= (1+\frac{1}{n})^n < e \\
   \end{align*}
 \end{proof}
 
