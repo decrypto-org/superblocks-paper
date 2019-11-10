@@ -136,22 +136,18 @@ We will now show that the savings from the interlink set technique are significa
   \]
 \end{lemma}
 \begin{proof}
-  By induction on $k$. Clearly it holds for $k=0$:
+  The left-hand side is an infinite geometric series:
+
+  \[
+    \sum_{j=0}^\infty (2^{-i})^j = \frac{2^i}{2^i-1}
+  \]
+
+  We can split it up at some arbitrary index $k \geq 0$:
 
   \begin{align*}
-    \frac{1}{2^{(k+1)i}-2^{ki}} + \sum_{j=0}^k 2^{-ij}
-    &= \frac{1}{2^i-2^0} + 2^0 \\
-    &= \frac{1}{2^i-1} + 1 = \frac{2^i}{2^i-1} \\
-  \end{align*}
-
-  For $k>0$ we have:
-
-  \begin{align*}
-    \frac{1}{2^{(k+1+1)i}-2^{(k+1)i}} + \sum_{j=0}^{k+1} 2^{-ij}
-    &= 2^{-i} (\frac{1}{2^{(k+1)i}-2^{ki}} + \sum_{j=0}^{k+1} 2^{-i(j-1)}) \\
-    &= 2^{-i} (\frac{1}{2^{(k+1)i}-2^{ki}} + \sum_{j=-1}^{k} 2^{-ij}) \\
-    &= 2^{-i} (\frac{1}{2^{(k+1)i}-2^{ki}} + \sum_{j=0}^{k} 2^{-ij} + 2^i) \\
-    &= 2^{-i} (\frac{2^i}{2^i-1} + 2^i) = \frac{1}{2^i-1} + 1 = \frac{2^i}{2^i-1} \\
+    \sum_{j=0}^\infty (2^{-i})^j &= \sum_{j=0}^k 2^{-ij} + \sum_{j=k+1}^\infty (2^{-i})^j\\
+    &= \sum_{j=0}^k 2^{-ij} + \frac{2^{-i(k + 1)}}{1  - 2^{-i}}
+    = \sum_{j=0}^k 2^{-ij} + \frac{1}{2^{i(k + 1)} - 2^{ik}}
   \end{align*}
 \end{proof}
 
