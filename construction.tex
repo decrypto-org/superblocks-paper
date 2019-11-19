@@ -144,11 +144,18 @@ We will now show that the savings from the interlink set technique are significa
 
   We can split it up at some arbitrary index $k \geq 0$:
 
-  \begin{align*}
-    \sum_{j=0}^\infty (2^{-i})^j &= \sum_{j=0}^k 2^{-ij} + \sum_{j=k+1}^\infty (2^{-i})^j\\
-    &= \sum_{j=0}^k 2^{-ij} + \frac{2^{-i(k + 1)}}{1  - 2^{-i}}
+  \[
+    \sum_{j=0}^\infty (2^{-i})^j = \sum_{j=0}^k 2^{-ij} + \sum_{j=k+1}^\infty (2^{-i})^j
+  \]
+
+  Applying the formula for geometric series sum from $j=k+1$ to $\infty$
+  on the second term, we obtain:
+
+  \[
+    \sum_{j=0}^k 2^{-ij} + \sum_{j=k+1}^\infty (2^{-i})^j
+    = \sum_{j=0}^k 2^{-ij} + \frac{2^{-i(k + 1)}}{1  - 2^{-i}}
     = \sum_{j=0}^k 2^{-ij} + \frac{1}{2^{i(k + 1)} - 2^{ik}}
-  \end{align*}
+  \]
 \end{proof}
 
 \begin{lemma}
